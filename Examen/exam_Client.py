@@ -2,8 +2,7 @@
 """
 Created on Mon Mar  2 09:14:33 2020
 
-@authors: omar
-          earm
+@author: omar-
 """
 
 import socket
@@ -13,10 +12,10 @@ import random
 
 
 def imprime_cuadricula(m, letras):
-    raya = '+' + ('-' * 3 + '+') * 15
+    raya = '  +' + ('-' * 3 + '+') * 15
     print(raya)
     for i in range(15):
-        print('|', end='')
+        print(letras[i]+' |', end='')
         for j in range(15):
             if m[i][j]==0:
                 m[i][j]=random.choice(letras);
@@ -34,11 +33,16 @@ def main():
         s.connect((HOST, PORT))
         data = s.recv(1024)
         data=pickle.loads(data)
-        for i in range(len(data)):
-            print(data[i])
-            
+     #  """ for i in range(len(data)):
+      #      print(data[i])
+       # print('Received', data)    """
+        m=" "*3
+        n=" "*2
+        print(" "*4+"0"+m+"1"+m+"2"+m+"3"+m+"4"+m+"5"+m+"6"+m+"7"+m+"8"+m+"9"+n+"10"+n+"11"+n+"12"+n+"13"+n+"14")
+    
         imprime_cuadricula(data,letras)
-    print('Received', data) 
+ 
+    
    
     
 main()
