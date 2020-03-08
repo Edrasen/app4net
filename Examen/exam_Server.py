@@ -4,7 +4,6 @@ Created on Mon Mar  2 09:49:26 2020
 
 @author: omar-
 """
-k
 import socket
 import marshal
 import pickle
