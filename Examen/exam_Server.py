@@ -3,6 +3,7 @@
 Created on Mon Mar  2 09:49:26 2020
 
 @author: omar-
+         edrasen
 """
 import socket
 import random
@@ -46,36 +47,27 @@ class palabras:
         self.palabra.append("profesores")
         self.palabra.append("salones")
         self.palabra.append("bancas")
-        self.palabra.append("pizarron")
+        self.palabra.append("lapicero")
         #print(self.palabra)
 
 
 def compruebaEspacios(palabra,matriz, ocupados, tamaño, x, y):
     seEscribio=False
     deshacer=1
+    no_located = []
     if x+tamaño<14:#para la validacion vertical se usa x porque son los renglones
         for i in palabra:
             if [x,y] in ocupados and matriz[x][y]!=i:
                 for m in range(deshacer):
                     ocupados.pop(len(ocupados)-1)
+                    #if i not in no_located
                 return False, matriz,ocupados
             matriz[x][y]=i
             ocupados.append([x,y])
             deshacer+=1
             x+=1
-            
         seEscribio=True
-            
-    elif x-tamaño>0:
-        for i in palabra:
-            if [x,y] in ocupados and matriz[x][y]!=i:
-                for m in range(deshacer):
-                    ocupados.pop(len(ocupados)-1)
-                return False, matriz,ocupados
-            matriz[x][y]=i
-            ocupados.append([x,y])
-            x-=1
-        seEscribio=True
+
     elif y+tamaño<14:
         for i in palabra:
             if [x,y] in ocupados and matriz[x][y]!=i:
@@ -84,8 +76,22 @@ def compruebaEspacios(palabra,matriz, ocupados, tamaño, x, y):
                 return False, matriz,ocupados
             matriz[x][y]=i
             ocupados.append([x,y])
+            deshacer+=1
             y+=1
         seEscribio=True
+
+    elif x-tamaño>0:
+        for i in palabra:
+            if [x,y] in ocupados and matriz[x][y]!=i:
+                for m in range(deshacer):
+                    ocupados.pop(len(ocupados)-1)
+                return False, matriz,ocupados
+            matriz[x][y]=i
+            ocupados.append([x,y])
+            deshacer+=1
+            x-=1
+        seEscribio=True
+
     elif y-tamaño>0:
         for i in palabra:
             if [x,y] in ocupados and matriz[x][y]!=i:
@@ -95,7 +101,10 @@ def compruebaEspacios(palabra,matriz, ocupados, tamaño, x, y):
             matriz[x][y]=i
             ocupados.append([x,y])
             y-=1
+            deshacer+=1
         seEscribio=True
+    else:
+        compruebaEspacios(no_located, matriz,ocupados,random.randint(0,14), random.randit(0,14))
     print(ocupados)
     return seEscribio, matriz, ocupados
    
@@ -104,7 +113,7 @@ def compruebaEspacios(palabra,matriz, ocupados, tamaño, x, y):
 def mezclaPalabras(matriz, palabras):
     ocupados=[]
     seEscribio=False
-    for i in range(len(palabras)-1):
+    for i in range(len(palabras)):
         while seEscribio==False:
             x=random.randint(0,14)
             y=random.randint(0,14)
