@@ -5,6 +5,7 @@ Created on Mon Mar  2 09:14:33 2020
 @author: omar-
 """
 
+
 import socket
 import pickle
 import random
@@ -33,6 +34,8 @@ def main():
         s.connect((HOST, PORT))
         data = s.recv(1024)
         data=pickle.loads(data)
+       
+        print(data)
      #  """ for i in range(len(data)):
       #      print(data[i])
        # print('Received', data)    """
