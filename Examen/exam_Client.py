@@ -59,7 +59,7 @@ def main():
             if i!=None and i!=[]:
                 posicionesNuevo.append(i)
         print(posicionesNuevo)
-                
+        print(len(posicionesNuevo))        
         print("\n\nEncontrar la siguiente lista de palabras: \n\n",palabra,"\n")
      #  """ for i in range(len(data)):
       #      print(data[i])
@@ -69,21 +69,30 @@ def main():
         n=" "*2
        
         print(" "*4+"0"+m+"1"+m+"2"+m+"3"+m+"4"+m+"5"+m+"6"+m+"7"+m+"8"+m+"9"+n+"10"+n+"11"+n+"12"+n+"13"+n+"14")
-    
-        imprime_cuadricula(data,letras)
-        renglon1=int(input("¿Encontraste una palabra? \nColoca el renglon de su inicial: "))
-        columna1=int(input(" Coloca la columna de su inicial: "))
-        renglon2=int(input("Ahora Coloca el renglon de donde termina: "))        
-        columna2=int(input(" Coloca la columna de donde termina: "))
-        for i in posicionesNuevo:
-            if i is not None and i!=[]:
-                if renglon1==i[0] and columna1==i[1] and renglon2==i[2] and columna2==i[3]:
-                    pal,posicionesNuevo,palabra=encuentraPal(palabra, posicionesNuevo,i)
-                    print("Encontraste ",pal)
-                    encontro=True
-        if encontro==False:
-            print("Te equivocaste, intentalo denuevo")
-        encontro=False
-   
+        contador  = 0
+        #print(len(posicionesNuevo))
+        while contador < 10:
+            if contador == 10:
+                flag = "termina"
+                s.sendall(flag.encode())
+
+            print(contador)
+            imprime_cuadricula(data,letras)
+            renglon1=int(input("¿Encontraste una palabra? \nColoca el renglon de su inicial: "))
+            columna1=int(input(" Coloca la columna de su inicial: "))
+            renglon2=int(input("Ahora Coloca el renglon de donde termina: "))        
+            columna2=int(input(" Coloca la columna de donde termina: "))
+            for i in posicionesNuevo:
+                if i is not None and i!=[]:
+                    if renglon1==i[0] and columna1==i[1] and renglon2==i[2] and columna2==i[3]:
+                        pal,posicionesNuevo,palabra=encuentraPal(palabra, posicionesNuevo,i)
+                        print("Encontraste ",pal)
+                        encontro=True
+                        contador = contador + 1
+                        print(contador)
+            if encontro==False:
+                print("Te equivocaste, intentalo denuevo")
+            encontro=False
+            
     
 main()

@@ -173,9 +173,15 @@ def main():
         s.listen()
         conn, addr = s.accept()
         with conn:
+            final = ""
             print('Connected by', addr)
-            while True:
+            while final != 'termina':
+                if final == 'termina':
+                    print("Juego terminado")
+                    conn.close
+                    
                 conn.sendall(dato)
                 conn.sendall(posiciones)
                 conn.sendall(pickle.dumps(dato2.palabra))
+                final = conn.recv(1024)
 main()
