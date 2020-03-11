@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Mar  2 09:49:26 2020
-
 @author: omar-
 """
 
@@ -175,13 +174,13 @@ def main():
         with conn:
             final = ""
             print('Connected by', addr)
-            while final != 'termina':
+            while True:
                 if final == 'termina':
                     print("Juego terminado")
                     conn.close
-                    
-                conn.sendall(dato)
-                conn.sendall(posiciones)
-                conn.sendall(pickle.dumps(dato2.palabra))
-                final = conn.recv(1024)
+                else:    
+                    conn.sendall(dato)
+                    conn.sendall(posiciones)
+                    conn.sendall(pickle.dumps(dato2.palabra))
+            final = conn.recv(1024)
 main()

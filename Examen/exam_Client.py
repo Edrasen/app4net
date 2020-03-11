@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Mar  2 09:14:33 2020
-
 @author: omar-
 """
 
@@ -75,24 +74,24 @@ def main():
             if contador == 10:
                 flag = "termina"
                 s.sendall(flag.encode())
-
-            print(contador)
-            imprime_cuadricula(data,letras)
-            renglon1=int(input("¿Encontraste una palabra? \nColoca el renglon de su inicial: "))
-            columna1=int(input(" Coloca la columna de su inicial: "))
-            renglon2=int(input("Ahora Coloca el renglon de donde termina: "))        
-            columna2=int(input(" Coloca la columna de donde termina: "))
-            for i in posicionesNuevo:
-                if i is not None and i!=[]:
-                    if renglon1==i[0] and columna1==i[1] and renglon2==i[2] and columna2==i[3]:
-                        pal,posicionesNuevo,palabra=encuentraPal(palabra, posicionesNuevo,i)
-                        print("Encontraste ",pal)
-                        encontro=True
-                        contador = contador + 1
-                        print(contador)
-            if encontro==False:
-                print("Te equivocaste, intentalo denuevo")
-            encontro=False
+            else:
+                print(contador)
+                imprime_cuadricula(data,letras)
+                renglon1=int(input("¿Encontraste una palabra? \nColoca el renglon de su inicial: "))
+                columna1=int(input(" Coloca la columna de su inicial: "))
+                renglon2=int(input("Ahora Coloca el renglon de donde termina: "))        
+                columna2=int(input(" Coloca la columna de donde termina: "))
+                for i in posicionesNuevo:
+                    if i is not None and i!=[]:
+                        if renglon1==i[0] and columna1==i[1] and renglon2==i[2] and columna2==i[3]:
+                            pal,posicionesNuevo,palabra=encuentraPal(palabra, posicionesNuevo,i)
+                            print("Encontraste ",pal)
+                            encontro=True
+                            contador = contador + 1
+                            print(contador)
+                if encontro==False:
+                    print("Te equivocaste, intentalo denuevo")
+                encontro=False
             
     
 main()
