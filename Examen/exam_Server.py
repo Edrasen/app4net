@@ -39,16 +39,16 @@ class palabras:
             self.escuela()
     def escuela(self):
         print("me meti")
-        self.palabra.append("LIBROS")
-        self.palabra.append("APUNTES")
-        self.palabra.append("COLORES")
-        self.palabra.append("PIZARRON")
-        self.palabra.append("PLUMONES")
-        self.palabra.append("ALUMNOS")
-        self.palabra.append("PROFESORES")
-        self.palabra.append("SALONES")
-        self.palabra.append("BANCAS")
-        self.palabra.append("CUADERNO")
+        self.palabra.append("libros")
+        self.palabra.append("apuntes")
+        self.palabra.append("colores")
+        self.palabra.append("pizarron")
+        self.palabra.append("plumones")
+        self.palabra.append("alumnos")
+        self.palabra.append("profesores")
+        self.palabra.append("salones")
+        self.palabra.append("bancas")
+        self.palabra.append("cuaderno")
         #print(self.palabra)
 
 
@@ -128,6 +128,7 @@ def compruebaEspacios(palabra,matriz, ocupados, tamaño, x, y):
         inifin.append(y+1)
         seEscribio=True
     print("inifin",inifin)
+    print("Ocupados", ocupados)
     return seEscribio, matriz, ocupados, inifin
    
     
@@ -148,7 +149,7 @@ def mezclaPalabras(matriz, palabras):
         print(matriz[i])
     print("\n\n")
     print(posiciones)
-    return matriz, posiciones
+    return matriz, posiciones, ocupados
         
             
             
@@ -161,10 +162,11 @@ def main():
     dato=matriz.m
     dato2=palabras(random.randint(0,4));
     enviar2=dato2.palabra
-    dato,posiciones=mezclaPalabras(dato, enviar2)
+    dato,posiciones,ocupados=mezclaPalabras(dato, enviar2)
     print(enviar2)
     dato=pickle.dumps(dato)
     posiciones=pickle.dumps(posiciones)
+    ocupados = pickle.dumps(ocupados)
     enviar2=pickle.dumps(enviar2)
     for i in range(15):
         print(matriz.m[i])
@@ -174,8 +176,10 @@ def main():
         conn, addr = s.accept()
         with conn:
             print('Connected by', addr)
+            conn.sendall(dato)
+            conn.sendall(posiciones)
+            conn.sendall(pickle.dumps(dato2.palabra))
+            conn.sendall(ocupados)
             while True:
-                conn.sendall(dato)
-                conn.sendall(posiciones)
-                conn.sendall(pickle.dumps(dato2.palabra))
+                conn.recv(1024)    
 main()
