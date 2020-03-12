@@ -30,11 +30,11 @@ class palabras:
         if n==0:
             self.escuela()
         elif n==1:
-            self.escuela()
+            self.deportes()
         elif n==2:
-            self.escuela()
+            self.colores()
         elif n==3:
-            self.escuela()
+            self.frutas()
         elif n==4:
             self.escuela()
     def escuela(self):
@@ -50,6 +50,40 @@ class palabras:
         self.palabra.append("bancas")
         self.palabra.append("cuaderno")
         #print(self.palabra)
+    def deportes(self):
+        print("me meti")
+        self.palabra.append("futbol")
+        self.palabra.append("lucha")
+        self.palabra.append("americano")
+        self.palabra.append("basquetbol")
+        self.palabra.append("voleibol")
+        self.palabra.append("waterpolo")
+        self.palabra.append("tennis")
+        self.palabra.append("fronton")
+        self.palabra.append("tocho")
+        self.palabra.append("beisbol")
+    def colores(self):
+        self.palabra.append("azul")
+        self.palabra.append("amarillo")
+        self.palabra.append("rojo")
+        self.palabra.append("cafe")
+        self.palabra.append("rosa")
+        self.palabra.append("verde")
+        self.palabra.append("dorado")
+        self.palabra.append("blanco")
+        self.palabra.append("negro")
+        self.palabra.append("morado")
+    def frutas(self):
+        self.palabra.append("naranja")
+        self.palabra.append("guayaba")
+        self.palabra.append("sandia")
+        self.palabra.append("papaya")
+        self.palabra.append("platano")
+        self.palabra.append("manzana")
+        self.palabra.append("durazno")
+        self.palabra.append("pera")
+        self.palabra.append("melon")
+        self.palabra.append("tuna")
 
 
 def compruebaEspacios(palabra,matriz, ocupados, tamaño, x, y):
@@ -128,7 +162,6 @@ def compruebaEspacios(palabra,matriz, ocupados, tamaño, x, y):
         inifin.append(y+1)
         seEscribio=True
     print("inifin",inifin)
-    print("Ocupados", ocupados)
     return seEscribio, matriz, ocupados, inifin
    
     
@@ -149,7 +182,7 @@ def mezclaPalabras(matriz, palabras):
         print(matriz[i])
     print("\n\n")
     print(posiciones)
-    return matriz, posiciones, ocupados
+    return matriz, posiciones
         
             
             
@@ -162,11 +195,10 @@ def main():
     dato=matriz.m
     dato2=palabras(random.randint(0,4));
     enviar2=dato2.palabra
-    dato,posiciones,ocupados=mezclaPalabras(dato, enviar2)
+    dato,posiciones=mezclaPalabras(dato, enviar2)
     print(enviar2)
     dato=pickle.dumps(dato)
     posiciones=pickle.dumps(posiciones)
-    ocupados = pickle.dumps(ocupados)
     enviar2=pickle.dumps(enviar2)
     for i in range(15):
         print(matriz.m[i])
@@ -176,10 +208,8 @@ def main():
         conn, addr = s.accept()
         with conn:
             print('Connected by', addr)
-            conn.sendall(dato)
-            conn.sendall(posiciones)
-            conn.sendall(pickle.dumps(dato2.palabra))
-            conn.sendall(ocupados)
             while True:
-                conn.recv(1024)    
+                conn.sendall(dato)
+                conn.sendall(posiciones)
+                conn.sendall(pickle.dumps(dato2.palabra))
 main()
