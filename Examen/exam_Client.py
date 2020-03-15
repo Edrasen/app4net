@@ -29,7 +29,8 @@ def imprime_cuadricula(m, letras):
         cont+=1
         print()
         print(raya) 
-def encuentraPal(palabras, posiciones, coordenada):
+
+def encuentraPalCO(palabras, posiciones, coordenada):
     n=0
     palabra=""
     for i in posiciones:
@@ -41,7 +42,59 @@ def encuentraPal(palabras, posiciones, coordenada):
         n+=1
     print(n, coordenada)
     return palabra, posiciones, palabras
-    
+
+def encuentraPalAN(palabras, posiciones, coordenada, shufflepal):
+    n=0
+    palabra=""
+    for i in posiciones:
+        if coordenada==i:
+            posiciones.pop(n)
+            
+            palabra= palabras.pop(n)
+            shufflepal.pop(n)
+            break
+        n+=1
+    print(n, coordenada)
+    return palabra, posiciones, palabras
+
+
+def anagrama(posicionesNuevo,palabras,Matriz,letras):
+    encontro=False
+    listpal = palabras
+    shufflepal = []
+    m=" "*3
+    n=" "*2
+    for pal in palabras:
+        l = list(pal)
+        random.shuffle(l)
+        shufflepal.append(''.join(l))
+
+    while len(posicionesNuevo) >0:
+        print("\nEncontrar la siguiente lista de palabras: \n\n",shufflepal,"\n")
+        print(" "*4+"0"+m+"1"+m+"2"+m+"3"+m+"4"+m+"5"+m+"6"+m+"7"+m+"8"+m+"9"+n+"10"+n+"11"+n+"12"+n+"13"+n+"14")
+        imprime_cuadricula(Matriz,letras)
+        renglon1=int(input("¿Encontraste una palabra? \nColoca el renglon de su inicial: "))
+        columna1=int(input(" Coloca la columna de su inicial: "))
+        renglon2=int(input("Ahora Coloca el renglon de donde termina: "))        
+        columna2=int(input(" Coloca la columna de donde termina: "))
+        for i in posicionesNuevo:
+            if i is not None and i!=[]:
+                if renglon1==i[0] and columna1==i[1] and renglon2==i[2] and columna2==i[3]:
+                    pal,posicionesNuevo,palabra=encuentraPalAN(listpal, posicionesNuevo,i, shufflepal)
+                    print("Encontraste ",pal)
+                    for i in range(0,15):
+                        for j in range(0,15):
+                            if i <= renglon2  and i >= renglon1: #este funciona para palabras verticales escritas normal
+                                if j >= columna1 and j <= columna2:
+                                    Matriz[i][j] = Matriz[i][j].upper()
+                    encontro=True
+                        
+        if encontro==False:
+            print("Te equivocaste, intentalo denuevo")
+        encontro=False
+    print("FELICIDADES ENCONTRASTE LAS PALABRAS")
+
+
 
 def concepto(posicionesNuevo,palabra,Matriz,letras):
     encontro=False
@@ -58,8 +111,13 @@ def concepto(posicionesNuevo,palabra,Matriz,letras):
         for i in posicionesNuevo:
             if i is not None and i!=[]:
                 if renglon1==i[0] and columna1==i[1] and renglon2==i[2] and columna2==i[3]:
-                    pal,posicionesNuevo,palabra=encuentraPal(palabra, posicionesNuevo,i)
+                    pal,posicionesNuevo,palabra=encuentraPalCO(palabra, posicionesNuevo,i)
                     print("Encontraste ",pal)
+                    for i in range(0,15):
+                        for j in range(0,15):
+                            if i <= renglon2  and i >= renglon1: #este funciona para palabras verticales escritas normal
+                                if j >= columna1 and j <= columna2:
+                                    Matriz[i][j] = Matriz[i][j].upper()
                     encontro=True
         if encontro==False:
             print("Te equivocaste, intentalo denuevo")
@@ -89,14 +147,14 @@ def main():
                 posicionesNuevo.append(i)
         print(posicionesNuevo)
         print("\n\n\n\n\n\t\t\t----------------------------------")
-        print("\t\t\t|¿Qué categoria quieres jugar?      |")
+        print("\t\t\t|ELige un modo de juego:      |")
         print("\t\t\t----------------------------------")
         print("\t\t\tA) CONCEPTO\n\t\t\tB) ANAGRAMA")
         opcion=input("\t\t\tSelecciona una opcion:" )
-        if opcion in "Aa":
+        if opcion in "Aa1":
             concepto(posicionesNuevo, palabra, Matriz,letras)
-        if opcion in "Bb":
-            concepto(posicionesNuevo, palabra, Matriz,letras)
+        if opcion in "Bb2":
+            anagrama(posicionesNuevo, palabra, Matriz,letras)
      #  """ for i in range(len(data)):
       #      print(data[i])
        # print('Received', data)    """
