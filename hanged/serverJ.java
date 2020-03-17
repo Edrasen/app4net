@@ -1,7 +1,7 @@
 import java.net.*;
 import java.io.*;
 import java.util.*;
-import java.util.logging.SocketHandler;
+
 
 public class serverJ {
 
@@ -23,9 +23,22 @@ public class serverJ {
                 System.out.println("Dificultad seleccionada: "+ level);
                 pw.println(palabra);
                 pw.flush();
-                pw.close();
                 
+                BufferedReader fin = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                String ffin = fin.readLine();
+                if (ffin.equals("VICTORIA"))
+                    System.out.println("EL JUGADOR HA GANADO!!");
+                else if(ffin.equals("DERROTA"))
+                    System.out.println("EL JUGADOR HA PERDIDO!!");
+                
+                String sscore = fin.readLine();
+                int score = Integer.parseInt(sscore);
+                System.out.println("La puntuación es:" + sscore);
+                
+                pw.close();
                 in.close();
+                fin.close();
+                //scr.close();
                 s.close();
             }
 
