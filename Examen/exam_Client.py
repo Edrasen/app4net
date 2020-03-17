@@ -4,7 +4,7 @@ Created on Mon Mar  2 09:14:33 2020
 
 @author: omar-
 """
-
+from time import time
 import socket
 import pickle
 import random
@@ -97,6 +97,7 @@ def anagrama(posicionesNuevo,palabras,Matriz,letras):
 
 
 def concepto(posicionesNuevo,palabra,Matriz,letras):
+    
     encontro=False
     m=" "*3
     n=" "*2
@@ -123,6 +124,8 @@ def concepto(posicionesNuevo,palabra,Matriz,letras):
             print("Te equivocaste, intentalo denuevo")
         encontro=False
     print("FELICIDADES ENCONTRASTE LAS PALABRAS")
+    
+    
     
 def main():
     letras=["a","b", "c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
@@ -152,12 +155,17 @@ def main():
         print("\t\t\tA) CONCEPTO\n\t\t\tB) ANAGRAMA")
         opcion=input("\t\t\tSelecciona una opcion:" )
         if opcion in "Aa1":
+            start_time = time()
             concepto(posicionesNuevo, palabra, Matriz,letras)
+            elapsed_time = time() - start_time
+            print("Elapsed time: %d seconds." % elapsed_time)
+            s.sendall(elapsed_time.encode())
         if opcion in "Bb2":
+            start_time = time()
             anagrama(posicionesNuevo, palabra, Matriz,letras)
-     #  """ for i in range(len(data)):
-      #      print(data[i])
-       # print('Received', data)    """
+            elapsed_time = time() - start_time
+            print("Elapsed time: %d seconds." % elapsed_time)
+            s.sendall(elapsed_time.encode())
        
    
     

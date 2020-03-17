@@ -191,7 +191,7 @@ def mezclaPalabras(matriz, palabras):
 def main():    
     HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
     PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
-   
+    scores = []
     dato=matriz.m
     dato2=palabras(random.randint(0,4));
     enviar2=dato2.palabra
@@ -212,4 +212,8 @@ def main():
                 conn.sendall(dato)
                 conn.sendall(posiciones)
                 conn.sendall(pickle.dumps(dato2.palabra))
+                tiempo = conn.recv(1024).decode()
+                time = int(tiempo)
+                scores.append(time)
+
 main()
