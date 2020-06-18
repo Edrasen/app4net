@@ -22,8 +22,10 @@ usuarios = {}
 recived_list = []
 
 exit_msg = " ha dejado el chat."
+join_msg = " se ha unido al chat."
 
 def com():
+    print("Server started...\nWaiting for connections...\n")
     while True:
         recived, addres = sock.recvfrom(10240)
         recived = recived.decode()
@@ -39,6 +41,8 @@ def com():
             #if(addres != usuarios[elem]):
             if recived[limit+1:] == " {quit}":
                 sock.sendto((recived[:limit]+exit_msg).encode(), usuarios[elem])
+            elif recived[limit+1:] == " {hi}":
+                sock.sendto((recived[:limit]+join_msg).encode(), usuarios[elem])
             else:
                 sock.sendto(recived.encode(), usuarios[elem])
 
