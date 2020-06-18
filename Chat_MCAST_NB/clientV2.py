@@ -13,26 +13,3 @@ class sender:
         self.sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, self.mcast_ttl)
         #self.name = input("Escribe tu nombre: ")
         #print("Welcome ", self.name)
-    
-    def enviar(self, msg, name):
-        #while True:
-            #mensaje = input(name + ": ")
-            self.sock.sendto((name +": "+msg).encode(), (self.mcast_g, self.mcast_pt))
-            
-    
-    def recibir(self):
-        while True:
-            recived = self.sock.recv(10240).decode()
-            #print(recived)
-
-    def comunicar(self):
-        #thread_send = Thread(target=self.enviar)
-        thread_recv = Thread(target=self.recibir)
-
-        #thread_send.start()
-        thread_recv.start()
-
-        #thread_send.join()
-        thread_recv.join()
-
-    
