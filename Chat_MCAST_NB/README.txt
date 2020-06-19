@@ -5,8 +5,11 @@ all the time other users messages.
 
 Chat app notify all users when someone joins and leaves the group.
 
+-------- FINAL -------
 
-It needs to add the function of a list of online clients, so we will be working on it in order to improve
-UI and give a better UX.
+Now chat lets select a specific user to chat with or chat with all members on the group.
+
+Users list is send using rpyc through localhost by remote procedure call.
+
 
 EARM
