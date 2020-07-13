@@ -3,6 +3,8 @@ It needs to handle separately all incomming messages to solve the blocking part 
 so there is no problem if you want send and receive messages at the same tame because a thread receive
 all the time other users messages.
 
+It uses concurrent programming
+
 Chat app notify all users when someone joins and leaves the group.
 
 -------- FINAL -------
