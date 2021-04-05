@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="../static/css/emojionearea.min.css", rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
+    <script src="../static/js/emojionearea.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../static/css/styles.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+   
+
+
+    <div class="container">
+        <nav style="background: rgb(26, 99, 233);">
+            <div class="van-wrapper">
+                <a href="# " class="brand-logo center">
+                    Chat Room
+                </a>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col s5" id="input">
+                <br>
+                <input disabled placeholder="Name" id="user">
+                <br>
+                <div class="row">    
+                    <div class="input-field col s12">
+
+                        <textarea class="" id="msg" placeholder="Write a message"></textarea>
+                        <script>
+                            $(document).ready(function() {
+                                $("#msg").emojioneArea({
+                                    pickerPosition: "bottom"
+                                });
+                            })
+                        </script>
+                        
+                        <br>
+                        <button class="btn waves-effect waves-light blue" id="send">Send
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+
+                </div>
+                <br>
+            </div>
+            <div class="col s7" id="chat_area">
+                <div class="row" id="msgs"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+<div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Hola</h4>
+      <p>Por favor escriba su nombre</p>
+      <input type="text" placeholder="Name" id="users">
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" id = "cl">Agree</a>
+    </div>
+  </div>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase.js"></script>
+    <script src="../static/js/main.js"></script>
+
+    
+    
+</body>
+</html>
